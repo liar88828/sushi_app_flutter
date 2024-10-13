@@ -18,30 +18,30 @@ class IntroScreen extends StatelessWidget {
           ),
         ),
         body: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Image.asset('lib/images/maki.png'),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Text(
                 'THE BEST RESTAURANT OF JAPANESE FOOD',
                 style: GoogleFonts.dmSerifDisplay(
                     fontSize: 34, color: Colors.white),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                   'Feel the taste of Japanese cuisine here in Sushi App ! Enjoy the best sushi in town with Sushi App !',
                   style: TextStyle(color: Colors.grey[300], height: 2)),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               FilledButton(
                 style: FilledButton.styleFrom(
-                    fixedSize: Size.fromHeight(50),
+                    fixedSize: const Size.fromHeight(50),
                     backgroundColor: Colors.orange[700]),
                 onPressed: () {},
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Get Statrted'),

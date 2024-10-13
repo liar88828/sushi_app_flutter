@@ -8,12 +8,12 @@ class FoodItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 200,
       height: 20,
       // height: 80,
       child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 8),
         // color: Colors.orange[100],
         color: Colors.white,
         child: Padding(
@@ -22,7 +22,7 @@ class FoodItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 width: 200,
                 child: Image.asset(
                   food.image,
@@ -46,7 +46,8 @@ class FoodItem extends StatelessWidget {
                           Row(
                             children: [
                               const Icon(Icons.star, color: Colors.yellow),
-                              Text(food.rating, style: TextStyle(fontSize: 18))
+                              Text(food.rating,
+                                  style: const TextStyle(fontSize: 18))
                             ],
                           )
                         ],

@@ -12,19 +12,30 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   List foodMenu = [
-    Food(name: "ebi", image: 'lib/images/ebi.png', price: "20", rating: '5.0'),
     Food(
-        name: "maki", image: 'lib/images/maki.png', price: "50", rating: '4.5'),
+        name: "ebi",
+        image: 'lib/images/ebi.png',
+        price: "20",
+        rating: '5.0',
+        description: ''),
+    Food(
+        name: "maki",
+        image: 'lib/images/maki.png',
+        price: "50",
+        rating: '4.5',
+        description: ''),
     Food(
         name: "nigiri",
         image: 'lib/images/nigiri.png',
         price: "30",
-        rating: '2.0'),
+        rating: '2.0',
+        description: ''),
     Food(
         name: "temaki",
         image: 'lib/images/temaki.png',
         price: "10",
-        rating: '7.0'),
+        rating: '7.0',
+        description: ''),
   ];
 
   @override
@@ -34,11 +45,11 @@ class _MenuScreenState extends State<MenuScreen> {
       appBar: AppBar(
         // backgroundColor: Colors.orange,
         centerTitle: true,
-        title: Text('Menu'),
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+        title: const Text('Menu'),
+        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.,
@@ -58,12 +69,12 @@ class _MenuScreenState extends State<MenuScreen> {
                           style: GoogleFonts.dmSerifDisplay(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         FilledButton(
                             style: FilledButton.styleFrom(
                                 backgroundColor: Colors.orange),
                             onPressed: () {},
-                            child: Row(
+                            child: const Row(
                               children: [
                                 Text('Redeem'),
                                 Icon(Icons.arrow_forward)
@@ -71,7 +82,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             ))
                       ],
                     ),
-                    Container(
+                    SizedBox(
                         // padding: EdgeInsets.all(10),
                         height: 100,
                         child: Image.asset(
@@ -81,21 +92,21 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // search
             TextField(
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     hintText: 'Search',
                     // border: OutlineInputBorder(),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                           // color: Colors.orange,
                           // width: 2
                           ),
                     ))),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Food Menu',
               style: TextStyle(
@@ -111,7 +122,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           food: foodMenu[index],
                         ))),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
                 child: Card(
                     color: Colors.white,
@@ -134,7 +145,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text("\$ 80.00")
+                                    const Text("\$ 80.00")
                                   ]),
                               IconButton(
                                   style: IconButton.styleFrom(
@@ -142,12 +153,13 @@ class _MenuScreenState extends State<MenuScreen> {
                                       // backgroundColor: Colors.red
                                       ),
                                   onPressed: () {},
-                                  icon: Icon(Icons.favorite_outline, size: 30
+                                  icon: const Icon(Icons.favorite_outline,
+                                      size: 30
                                       // color: Colors.white,
                                       ))
                             ])))),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
                 child: Card(
                     color: Colors.white,
@@ -170,7 +182,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text("\$ 40.00")
+                                    const Text("\$ 40.00")
                                   ]),
                               IconButton(
                                   style: IconButton.styleFrom(
@@ -178,7 +190,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                       // backgroundColor: Colors.red
                                       ),
                                   onPressed: () {},
-                                  icon: Icon(Icons.favorite_outline, size: 30
+                                  icon: const Icon(Icons.favorite_outline,
+                                      size: 30
                                       // color: Colors.white,
                                       ))
                             ]))))
