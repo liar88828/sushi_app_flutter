@@ -1,17 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sushi_app/models/food.dart';
+import 'package:sushi_app/models/shop.dart';
 
-class DetailFoodScreen extends StatelessWidget {
-  const DetailFoodScreen({super.key});
+class DetailFoodScreen extends StatefulWidget {
+  final Food food;
+  const DetailFoodScreen({super.key, required this.food});
 
-  static Food foodMenu = Food(
-      name: "Ebi Furai",
-      image: 'lib/images/ebi.png',
-      price: "20.00",
-      rating: '5.0',
-      description:
-          'is a breaded and deep-fried prawn dish, of darker and crunchy texture. Traditionally kuruma ebi was used, but many stores have started using cheaper black tiger shrimp.');
+  @override
+  State<DetailFoodScreen> createState() => _DetailFoodScreenState();
+}
+
+class _DetailFoodScreenState extends State<DetailFoodScreen> {
+  int qtyCount = 0;
+  // decrement
+  void decrement() {
+    setState(() {
+      if (qtyCount > 0) {
+        qtyCount--;
+      }
+    });
+  }
+
+// increment
+  void increment() {
+    setState(() {
+      qtyCount++;
+    });
+  }
+
+// add trolley
+  void addTrolley() {
+    if (qtyCount > 0) {
+      final shop = context.read<Shop>();
+      shop.addToCart(widget.food, qtyCount);
+      // Navigator.pop(context);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Success"),
+          content: const Text("Added to cart"),
+          actions: [
+            // will close dialog
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.done)),
+            // const Text("Added to cart"),
+            // will redirect
+            //   TextButton(
+            //       onPressed: () {
+            //         Navigator.pop(context);
+            //       },
+            //       child: const Text("OK"))
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +75,7 @@ class DetailFoodScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "\$ ${foodMenu.price}",
+                  "\$ ${widget.food.price}",
                   style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -37,21 +86,21 @@ class DetailFoodScreen extends StatelessWidget {
                     IconButton(
                         style: IconButton.styleFrom(
                             backgroundColor: Colors.orange[700]),
-                        onPressed: () {},
+                        onPressed: decrement,
                         icon: const Icon(
                           Icons.remove,
                           color: Colors.white,
                         )),
                     SizedBox(width: 10),
                     Text(
-                      3.toString(),
+                      qtyCount.toString(),
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     SizedBox(width: 10),
                     IconButton(
                         style: IconButton.styleFrom(
                             backgroundColor: Colors.orange[700]),
-                        onPressed: () {},
+                        onPressed: increment,
                         icon: const Icon(Icons.add, color: Colors.white))
                   ],
                 )
@@ -63,7 +112,7 @@ class DetailFoodScreen extends StatelessWidget {
                   fixedSize: Size(double.maxFinite, 50),
                   backgroundColor: Colors.orange[700],
                 ),
-                onPressed: () {},
+                onPressed: addTrolley,
                 child: const Text(
                   'Add To Cart',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -82,15 +131,15 @@ class DetailFoodScreen extends StatelessWidget {
           children: [
             Center(
               child: Image.asset(
-                foodMenu.image,
+                widget.food.image,
                 height: 200,
               ),
             ),
             Row(children: [
               const Icon(Icons.star, color: Colors.yellow),
-              Text(foodMenu.rating)
+              Text(widget.food.rating)
             ]),
-            Text(foodMenu.name,
+            Text(widget.food.name,
                 style: GoogleFonts.dmSerifDisplay(
                     fontSize: 28, fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
@@ -99,7 +148,7 @@ class DetailFoodScreen extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               textAlign: TextAlign.justify,
-              foodMenu.description,
+              widget.food.description,
               style: TextStyle(color: Colors.grey[600], height: 2),
             ),
             const SizedBox(height: 20),

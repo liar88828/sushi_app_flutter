@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_app/models/food.dart';
+import 'package:sushi_app/models/shop.dart';
+import 'package:sushi_app/screens/detail_food_screen.dart';
+import 'package:sushi_app/screens/trolley_screen.dart';
 import 'package:sushi_app/widgets/food_item.dart';
+import 'package:provider/provider.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -11,39 +15,41 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  List foodMenu = [
-    Food(
-        name: "ebi",
-        image: 'lib/images/ebi.png',
-        price: "20",
-        rating: '5.0',
-        description: ''),
-    Food(
-        name: "maki",
-        image: 'lib/images/maki.png',
-        price: "50",
-        rating: '4.5',
-        description: ''),
-    Food(
-        name: "nigiri",
-        image: 'lib/images/nigiri.png',
-        price: "30",
-        rating: '2.0',
-        description: ''),
-    Food(
-        name: "temaki",
-        image: 'lib/images/temaki.png',
-        price: "10",
-        rating: '7.0',
-        description: ''),
-  ];
+  void navigationToDetail(int index) {
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailFoodScreen(food: foodMenu[index])));
+  }
 
   @override
   Widget build(BuildContext context) {
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     return Scaffold(
       // backgroundColor: Colors.orange,
+
       appBar: AppBar(
         // backgroundColor: Colors.orange,
+        actions: [
+          Consumer<Shop>(
+              builder: (context, value, child) => IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TrolleyScreen()),
+                      );
+                    },
+                    icon: Badge.count(
+                      count: value.lengthCart(),
+                      child: Icon(Icons.shopping_cart),
+                    ),
+                  ))
+        ],
         centerTitle: true,
         title: const Text('Menu'),
         leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
@@ -120,6 +126,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => FoodItem(
                           food: foodMenu[index],
+                          navigationToDetail: () => navigationToDetail(index),
                         ))),
 
             const SizedBox(height: 20),

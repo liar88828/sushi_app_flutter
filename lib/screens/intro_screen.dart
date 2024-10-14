@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sushi_app/screens/menu_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    void toNavigateMenuScreen() {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MenuScreen(),
+          ));
+    }
+
     return Scaffold(
         backgroundColor: Colors.orange,
         appBar: AppBar(
@@ -40,7 +49,7 @@ class IntroScreen extends StatelessWidget {
                 style: FilledButton.styleFrom(
                     fixedSize: const Size.fromHeight(50),
                     backgroundColor: Colors.orange[700]),
-                onPressed: () {},
+                onPressed: toNavigateMenuScreen,
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
